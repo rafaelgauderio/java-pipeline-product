@@ -1,0 +1,6 @@
+camiseta,50.00
+tenis,200.00
+meia,5.00
+cinto,120.00
+cueca,25.50
+jaqueta,340.00
