@@ -22,7 +22,8 @@ public class Program {
 
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
-
+		
+		System.out.println("Exempla of file path: c:\\pasta\\arquivo.txt\"");
 		System.out.println("Enter file path:");
 		String FilePath = sc.nextLine();
 
@@ -48,19 +49,19 @@ public class Program {
 			
 			//pipeline 
 			double average = list.stream()
-					.map(pro->pro.getPrice())
-					.reduce(0.0, (x,y) -> x+y) / list.size() ;
+					.map(pro->pro.getPrice()) // get only the price of the object Product
+					.reduce(0.0, (x,y) -> x+y) / list.size() ; // sum of prices / size of the list
 								
 			System.out.println("Avegare price" + String.format(" U$ %.2f",average));
 			System.out.println();
 			
 			
-			Comparator<String> comp =  (s1 ,s2) -> s1.toUpperCase().compareTo(s2.toUpperCase());
+			Comparator<String> comparator =  (s1 ,s2) -> s1.toUpperCase().compareTo(s2.toUpperCase());
 			
 			System.out.println("List in descendig order");			
 			List<String> namesDescending = list.stream()
-					.filter(p -> p.getPrice() < average)
-					.map(p->p.getName()).sorted(comp.reversed())
+					.filter(p -> p.getPrice() < average) // get only Products the have price smaller than the average
+					.map(p->p.getName()).sorted(comparator.reversed()) // new stream with just the names, then ordering by descending order
 					.collect(Collectors.toList());
 			
 			
@@ -70,7 +71,7 @@ public class Program {
 			System.out.println("List in Alphabetical order");
 			List<String> namesAlpha = list.stream()
 					.filter(p -> p.getPrice() < average)
-					.map(p->p.getName()).sorted(comp)
+					.map(p->p.getName()).sorted(comparator) // ascending order
 					.collect(Collectors.toList());
 			namesAlpha.forEach(System.out::println);
 		}
